@@ -4,8 +4,11 @@
 ## Тестируемый сайт
 [qacoursemoodle.innopolis.university](https://qacoursemoodle.innopolis.university)
 
+## Инструкция
+Описание инструкции
+
 ## Добавление инструкции в Readme
-[Branch readme]()
+[Branch readme](pull/1)
 1. Добавить общее описание проекта
 2. Добавить описание, как локально развернуть проект
 3. Добавить описание, как воспользоваться отчетами Allure
