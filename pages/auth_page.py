@@ -2,7 +2,8 @@ from selenium.webdriver.remote.webelement import WebElement
 
 from locators.auth_locators import LoginPageLocators
 from locators.base_locators import BasePageLocators
-from models.auth import AuthData
+from locators.personaldata_locators import PersonalDataPageLocators
+from models.auth_model import AuthData
 from pages.base_page import BasePage
 
 
@@ -55,4 +56,17 @@ class LoginPage(BasePage):
     def auth_login_error(self) -> str:
         return self.find_element(LoginPageLocators.LOGIN_ERROR).text
 
+    def go_to_editing_personal_data(self):
+        self.click_element(self.user_menu())
+        self.click_element(self.user_menu_settings())
+        self.click_element(self.find_element(PersonalDataPageLocators.EDIT_INFO))
 
+    def user_menu_settings(self) -> WebElement:
+        return self.find_element(LoginPageLocators.USER_MENU_SETTINGS)
+
+    def sign_out(self):
+        if self.is_auth():
+            self.click_element(self.user_menu())
+            self.click_element(self.exit())
+        if self.confirm_exit_window():
+            self.click_element(self.confirm_exit())
