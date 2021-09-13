@@ -1,6 +1,6 @@
 import pytest
 
-from common.const import AuthConst
+from common.auth_const import AuthConst
 from models.auth import AuthData
 
 
