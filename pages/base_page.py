@@ -1,4 +1,5 @@
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -43,3 +44,9 @@ class BasePage:
 
     def click_enter(self, element):
         element.send_keys(Keys.RETURN)
+
+    def get_clickable_element(self, locator, wait_time: int = 2) -> WebElement:
+        element = WebDriverWait(self.app.driver, wait_time).until(
+            expected_conditions.element_to_be_clickable(locator)
+        )
+        return element
