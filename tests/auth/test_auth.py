@@ -4,25 +4,28 @@ from common.auth_const import AuthConst
 from models.auth_model import AuthData
 
 
+@pytest.mark.auth
 class TestAuth:
     def test_auth_valid_data(self, app):
         """
-        Шаги
-        1. Открыть главную страницу
-        2. Авторизоваться с действительными данными
-        3. Проверить результат аутентификации
+        Шаги.
+
+        1. Открыть главную страницу.
+        2. Авторизоваться с действительными данными.
+        3. Проверить результат аутентификации.
         """
         app.open_auth_page()
-        data = AuthData(login='user_am@test.com', password='Psf2DrCMeG**')
+        data = AuthData(login="user_am@test.com", password="Psf2DrCMeG**")
         app.login.auth(data)
-        assert app.login.is_auth(), 'We are not auth'
+        assert app.login.is_auth(), "We are not auth"
 
     def test_auth_invalid_data(self, app):
         """
-        Шаги
-         1. Открыть главную страницу
-         2. Авторизоваться с не действительными данными
-         3. Проверить результат аутентификации
+        Шаги.
+
+         1. Открыть главную страницу.
+         2. Авторизоваться с не действительными данными.
+         3. Проверить результат аутентификации.
         """
         app.open_auth_page()
         data = AuthData.random()
@@ -32,7 +35,8 @@ class TestAuth:
     @pytest.mark.parametrize("field", ["login", "password"])
     def test_auth_empty_data(self, app, field):
         """
-        Шаги
+        Шаги.
+
          1. Открыть главную страницу
          2. Авторизоваться с пустыми данными
          3. Проверить результат аутентификации
@@ -42,4 +46,3 @@ class TestAuth:
         setattr(data, field, None)
         app.login.auth(data)
         assert AuthConst.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
-

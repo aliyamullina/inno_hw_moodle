@@ -12,17 +12,9 @@ class PersonalDataPageLocators:
     ABOUT = (By.ID, "id_description_editoreditable")
     SUBMIT_BUTTON = (By.ID, "id_submitbutton")
     NAVBAR_ITEMS = (By.CLASS_NAME, "breadcrumb-item")
-    SUCCESS_ALERT = (By.CLASS_NAME, "alert-success")
     COUNTRY_SELECT = (By.ID, "id_country")
     TIMEZONE_SELECT = (By.ID, "id_timezone")
     EMAIL_DISPLAY = (By.ID, "id_maildisplay")
-    USER_IMAGE_DESCRIPTION = (By.ID, "id_imagealt")
-    USER_IMAGE_FILE_ADD_BUTTON = (By.CLASS_NAME, "fp-btn-add")
-    DOWNLOAD_FILE_SECTION = (By.XPATH, "//span[text()='Загрузить файл']")
-    USER_IMAGE_FILE_CHOOSE_INPUT = (By.CSS_SELECTOR, "input[type='file']")
-    DOWNLOAD_FILE_BUTTON = (By.CLASS_NAME, "fp-upload-btn")
-    USER_PROFILE_DEFAULT_PICTURE = (By.CLASS_NAME, "defaultuserpic")
-    DELETE_CURRENT_IMAGE_BUTTON = (By.CSS_SELECTOR, "label[for='id_deletepicture']")
 
 
 class PersonalDataPageMoreLocators:

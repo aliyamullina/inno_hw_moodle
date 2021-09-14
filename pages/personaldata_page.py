@@ -1,9 +1,18 @@
+import logging
+import conftest
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
-from locators.personaldata_locators import PersonalDataPageLocators, PersonalDataPageMoreLocators, \
-    PersonalDataPageOptionalLocators, PersonalDataPageTagLocators
+
+from locators.personaldata_locators import (
+    PersonalDataPageLocators,
+    PersonalDataPageMoreLocators,
+    PersonalDataPageOptionalLocators,
+    PersonalDataPageTagLocators,
+)
 from pages.base_page import BasePage
+
+logger = logging.getLogger("moodle")
 
 
 class PersonalDataPage(BasePage):
@@ -44,36 +53,6 @@ class PersonalDataPage(BasePage):
     def about_input(self) -> WebElement:
         return self.find_element(PersonalDataPageLocators.ABOUT)
 
-    def user_image_file_add_button(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.USER_IMAGE_FILE_ADD_BUTTON
-        )
-
-    def download_file_section(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.DOWNLOAD_FILE_SECTION
-        )
-
-    def user_image_file_choose_input(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.USER_IMAGE_FILE_CHOOSE_INPUT
-        )
-
-    def download_file_button(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.DOWNLOAD_FILE_BUTTON
-        )
-
-    def delete_current_image_button(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.DELETE_CURRENT_IMAGE_BUTTON
-        )
-
-    def user_image_description_input(self) -> WebElement:
-        return self.find_clickable_element(
-            PersonalDataPageLocators.USER_IMAGE_DESCRIPTION
-        )
-
     def submit_button(self) -> WebElement:
         return self.find_element(PersonalDataPageLocators.SUBMIT_BUTTON)
 
@@ -104,16 +83,6 @@ class PersonalDataPage(BasePage):
     def input_about(self, text):
         self.fill_element(self.about_input(), text)
 
-    def choose_user_image_file(self, image_file):
-        self.click_element(self.delete_current_image_button())
-        self.click_element(self.user_image_file_add_button())
-        self.click_element(self.download_file_section())
-        self.fill_element(self.user_image_file_choose_input(), image_file)
-        self.click_element(self.download_file_button())
-
-    def input_user_image_description(self, text):
-        self.fill_element(self.user_image_description_input(), text)
-
     def submit_changes(self):
         self.click_element(self.submit_button())
 
@@ -128,10 +97,15 @@ class PersonalDataPage(BasePage):
         self.select_timezone(data.timezone)
         self.input_about(data.about)
         self.submit_changes()
+        conftest.logger.info(
+            f"Персональные данные. Имя: {data.name} и фамилия: {data.last_name}"
+        )
 
     def is_changed(self, wait_time=10):
         header_user_info_elements = WebDriverWait(self.app.driver, wait_time).until(
-            expected_conditions.presence_of_all_elements_located(PersonalDataPageLocators.NAVBAR_ITEMS),
+            expected_conditions.presence_of_all_elements_located(
+                PersonalDataPageLocators.NAVBAR_ITEMS
+            ),
             message=f"Can't find elements by locator "
             f"{PersonalDataPageLocators.NAVBAR_ITEMS}",
         )
@@ -140,23 +114,12 @@ class PersonalDataPage(BasePage):
         else:
             return False
 
-    def set_user_image(self, image_file, user_image_description):
-        self.choose_user_image_file(image_file)
-        self.input_user_image_description(user_image_description)
-        self.submit_changes()
-
-    def is_user_image_changed(self):
-        if self.is_changed() and not self.find_elements(
-            PersonalDataPageLocators.USER_PROFILE_DEFAULT_PICTURE
-        ):
-            return True
-        else:
-            return False
-
 
 class PersonalDataPageMore(BasePage):
     def find_open_info(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageMoreLocators.MORE_SECTION_BUTTON)
+        return self.find_clickable_element(
+            PersonalDataPageMoreLocators.MORE_SECTION_BUTTON
+        )
 
     def open_info(self):
         self.click_element(self.find_open_info())
@@ -165,7 +128,9 @@ class PersonalDataPageMore(BasePage):
         return self.find_clickable_element(PersonalDataPageMoreLocators.NAME_PHONETIC)
 
     def lastname_phonetic_input(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageMoreLocators.LAST_NAME_PHONETIC)
+        return self.find_clickable_element(
+            PersonalDataPageMoreLocators.LAST_NAME_PHONETIC
+        )
 
     def middle_name_input(self) -> WebElement:
         return self.find_clickable_element(PersonalDataPageMoreLocators.MIDDLE_NAME)
@@ -225,31 +190,41 @@ class PersonalDataPageOptional(BasePage):
         self.fill_element(self.find_individual_number(), individualnumber)
 
     def find_institution(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageOptionalLocators.INSTITUTION_INPUT)
+        return self.find_clickable_element(
+            PersonalDataPageOptionalLocators.INSTITUTION_INPUT
+        )
 
     def institution_input(self, institution):
         self.fill_element(self.find_institution(), institution)
 
     def find_department(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageOptionalLocators.DEPARTMENT_INPUT)
+        return self.find_clickable_element(
+            PersonalDataPageOptionalLocators.DEPARTMENT_INPUT
+        )
 
     def department_input(self, department):
         self.fill_element(self.find_department(), department)
 
     def find_phone1(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageOptionalLocators.PHONE1_INPUT)
+        return self.find_clickable_element(
+            PersonalDataPageOptionalLocators.PHONE1_INPUT
+        )
 
     def phone1_input(self, phone1):
         self.fill_element(self.find_phone1(), phone1)
 
     def find_phone2(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageOptionalLocators.PHONE2_INPUT)
+        return self.find_clickable_element(
+            PersonalDataPageOptionalLocators.PHONE2_INPUT
+        )
 
     def phone2_input(self, phone2):
         self.fill_element(self.find_phone2(), phone2)
 
     def find_address(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageOptionalLocators.ADDRESS_INPUT)
+        return self.find_clickable_element(
+            PersonalDataPageOptionalLocators.ADDRESS_INPUT
+        )
 
     def address_input(self, address):
         self.fill_element(self.find_address(), address)
@@ -280,7 +255,9 @@ class PersonalDataPageOptional(BasePage):
 
 class PersonalDataPageTag(BasePage):
     def find_open_info(self) -> WebElement:
-        return self.find_clickable_element(PersonalDataPageTagLocators.TAG_SECTION_BUTTON)
+        return self.find_clickable_element(
+            PersonalDataPageTagLocators.TAG_SECTION_BUTTON
+        )
 
     def open_info(self):
         self.click_element(self.find_open_info())
