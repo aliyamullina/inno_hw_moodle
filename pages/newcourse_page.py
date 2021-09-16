@@ -1,5 +1,8 @@
 from selenium.webdriver.remote.webelement import WebElement
-from locators.newcourse_locators import NewCourseManagementLocators, NewCourseCreateLocators
+from locators.newcourse_locators import (
+    NewCourseManagementLocators,
+    NewCourseCreateLocators,
+)
 from models.newcourse_model import NewCourse
 from pages.base_page import BasePage
 

@@ -6,9 +6,9 @@ from models.auth_model import AuthData
 from pages.application import Application
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def app(request):
-    base_url = request.config.getoption('--base-url')
+    base_url = request.config.getoption("--base-url")
     fixture = Application(webdriver.Chrome(ChromeDriverManager().install()), base_url)
     yield fixture
     fixture.quit()
@@ -16,21 +16,21 @@ def app(request):
 
 def pytest_addoption(parser):
     parser.addoption(
-        '--base-url',
-        action='store',
-        default='https://qacoursemoodle.innopolis.university/',
-        help='enter base_url',
+        "--base-url",
+        action="store",
+        default="https://qacoursemoodle.innopolis.university/",
+        help="enter base_url",
     ),
     parser.addoption(
-        '--username',
-        action='store',
-        default='user_am@test.com',
-        help='enter username',
+        "--username",
+        action="store",
+        default="user_am@test.com",
+        help="enter username",
     ),
     parser.addoption(
-        '--password',
-        default='Psf2DrCMeG**',
-        help='enter password',
+        "--password",
+        default="Psf2DrCMeG**",
+        help="enter password",
     ),
 
 

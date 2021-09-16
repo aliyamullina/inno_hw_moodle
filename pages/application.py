@@ -1,7 +1,11 @@
 from pages.auth_page import LoginPage
 from pages.newcourse_page import NewCoursePage
-from pages.personaldata_page import PersonalDataPage, PersonalDataPageMore, PersonalDataPageOptional, \
-    PersonalDataPageTag
+from pages.personaldata_page import (
+    PersonalDataPage,
+    PersonalDataPageMore,
+    PersonalDataPageOptional,
+    PersonalDataPageTag,
+)
 
 
 class Application:

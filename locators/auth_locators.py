@@ -2,12 +2,12 @@ from selenium.webdriver.common.by import By
 
 
 class LoginPageLocators:
-    SIGN_IN = (By.CLASS_NAME, 'usermenu')
-    SIGN_IN_LINK = (By.TAG_NAME, 'a')
+    SIGN_IN = (By.CLASS_NAME, "usermenu")
+    SIGN_IN_LINK = (By.TAG_NAME, "a")
 
-    LOGIN_INPUT = (By.ID, 'username')
-    PASSWORD_INPUT = (By.ID, 'password')
-    AUTH_BUTTON_SUBMIT = (By.ID, 'loginbtn')
+    LOGIN_INPUT = (By.ID, "username")
+    PASSWORD_INPUT = (By.ID, "password")
+    AUTH_BUTTON_SUBMIT = (By.ID, "loginbtn")
 
     FORM = (By.ID, "page-wrapper")
     USER_BUTTON = (By.CLASS_NAME, "userbutton")
