@@ -1,4 +1,5 @@
 from pages.auth_page import LoginPage
+from pages.newcourse_page import NewCoursePage
 from pages.personaldata_page import PersonalDataPage, PersonalDataPageMore, PersonalDataPageOptional, \
     PersonalDataPageTag
 
@@ -12,6 +13,7 @@ class Application:
         self.personal_data_more = PersonalDataPageMore(self)
         self.personal_data_optional = PersonalDataPageOptional(self)
         self.personal_data_tag = PersonalDataPageTag(self)
+        self.new_course = NewCoursePage(self)
 
     def open_main_page(self):
         self.driver.get(self.url)
