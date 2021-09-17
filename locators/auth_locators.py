@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-class LoginPageLocators:
+class AuthPageLocators:
     SIGN_IN = (By.CLASS_NAME, "usermenu")
     SIGN_IN_LINK = (By.TAG_NAME, "a")
 

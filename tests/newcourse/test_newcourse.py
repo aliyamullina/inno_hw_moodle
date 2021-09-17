@@ -25,8 +25,8 @@ class TestNewCourse:
     @pytest.mark.parametrize(
         "full_name, short_name",
         [
-            ["Тестовое полное имя", ""],
-            ["", "Тестовое короткое имя"],
+            [NewCourse.random().short_name, ""],
+            ["", NewCourse.random().full_name],
         ],
     )
     def test_create_new_course_with_invalid_data(

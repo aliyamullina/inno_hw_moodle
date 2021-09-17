@@ -1,4 +1,4 @@
-from pages.auth_page import LoginPage
+from pages.auth_page import AuthPage
 from pages.newcourse_page import NewCoursePage
 from pages.personaldata_page import (
     PersonalDataPage,
@@ -12,7 +12,7 @@ class Application:
     def __init__(self, driver, url):
         self.driver = driver
         self.url = url
-        self.login = LoginPage(self)
+        self.login = AuthPage(self)
         self.personal_data = PersonalDataPage(self)
         self.personal_data_more = PersonalDataPageMore(self)
         self.personal_data_optional = PersonalDataPageOptional(self)

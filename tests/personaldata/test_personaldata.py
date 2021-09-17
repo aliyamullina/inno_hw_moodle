@@ -64,11 +64,9 @@ class TestPersonalData:
     @pytest.mark.parametrize(
         "name, last_name",
         [
-            ["123", "123"],
-            ["---", "---"],
-            ["\xbdR6\x10\x7f", "\xbdR6\x10\x7f"],
-            [PersonalData().random().url, PersonalData().random().url],
-            [PersonalData().random().image_url, PersonalData().random().image_url],
+            ["", ""],
+            ["", PersonalData().random().last_name],
+            [PersonalData().random().name, ""],
         ],
     )
     def test_edit_incorrect_name_lastname(self, app, auth, name, last_name):
@@ -79,7 +77,7 @@ class TestPersonalData:
         2. Авторизоваться с действительными данными.
         3. Проверить результат аутентификации.
         4. Перейти на страницу редактирования личных данных.
-        5. Изменить имя или (и) фамилию на цифры.
+        5. Изменить имя или (и) фамилию на пустое значение.
         6. Убедиться, что редактирование не прошло успешно.
         """
         app.login.go_to_editing_personal_data()
