@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.remote.webelement import WebElement
 from locators.newcourse_locators import (
     NewCourseManagementLocators,
@@ -5,6 +6,8 @@ from locators.newcourse_locators import (
 )
 from models.newcourse_model import NewCourse
 from pages.base_page import BasePage
+
+logger = logging.getLogger("moodle")
 
 
 class NewCoursePage(BasePage):

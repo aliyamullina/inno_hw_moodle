@@ -1,9 +1,12 @@
+import allure
+import logging
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-
 from models.auth_model import AuthData
 from pages.application import Application
+
+logger = logging.getLogger("moodle")
 
 
 @pytest.fixture(scope="session")
@@ -44,3 +47,24 @@ def auth(app, request):
     assert app.login.is_auth(), "You are not auth"
     yield
     app.login.sign_out()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when == "call" and rep.failed:
+        try:
+            if "app" in item.fixturenames:
+                web_driver = item.funcargs["app"]
+            else:
+                logger.error("Fail to take screen-shot")
+                return
+            logger.info("Screen-shot done")
+            allure.attach(
+                web_driver.driver.get_screenshot_as_png(),
+                name="screenshot",
+                attachment_type=allure.attachment_type.PNG,
+            )
+        except Exception as e:
+            logger.error("Fail to take screen-shot: {}".format(e))

@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,6 +9,8 @@ from locators.personaldata_locators import (
     PersonalDataPageTagLocators,
 )
 from pages.base_page import BasePage
+
+logger = logging.getLogger("moodle")
 
 
 class PersonalDataPage(BasePage):
