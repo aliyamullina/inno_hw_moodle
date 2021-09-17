@@ -1,7 +1,9 @@
 import logging
+import conftest
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
+
 from locators.personaldata_locators import (
     PersonalDataPageLocators,
     PersonalDataPageMoreLocators,
@@ -135,6 +137,7 @@ class PersonalDataPage(BasePage):
         self.select_timezone(data.timezone)
         self.input_about(data.about)
         self.submit_changes()
+        conftest.logger.info(f"Данные изменены '{data.name}', '{data.last_name}'")
 
     def is_changed(self, wait_time=10):
         header_user_info_elements = WebDriverWait(self.app.driver, wait_time).until(

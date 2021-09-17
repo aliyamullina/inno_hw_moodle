@@ -1,4 +1,5 @@
 import logging
+import conftest
 from selenium.webdriver.remote.webelement import WebElement
 from locators.newcourse_locators import (
     NewCourseManagementLocators,
@@ -27,11 +28,12 @@ class NewCoursePage(BasePage):
         return self.find_element(NewCourseManagementLocators.ADD_NEW_COURSE_BUTTON)
 
     # Create new course
-    def create_new_course(self, new_course_data: NewCourse) -> None:
-        self.fill_element(self.full_name_input(), new_course_data.full_name)
-        self.fill_element(self.short_name_input(), new_course_data.short_name)
-        self.fill_element(self.description_input(), new_course_data.description)
+    def create_new_course(self, data: NewCourse) -> None:
+        self.fill_element(self.full_name_input(), data.full_name)
+        self.fill_element(self.short_name_input(), data.short_name)
+        self.fill_element(self.description_input(), data.description)
         self.click_element(self.save_and_display_button())
+        conftest.logger.info(f"Курс создан '{data.full_name}'")
 
     def full_name_input(self) -> WebElement:
         return self.find_element(NewCourseCreateLocators.FULL_NAME)
@@ -46,10 +48,10 @@ class NewCoursePage(BasePage):
         return self.find_element(NewCourseCreateLocators.SAVE_AND_DISPLAY_BUTTON)
 
     # Check create new course
-    def is_course_exist(self, new_course_data: NewCourse) -> bool:
+    def is_course_exist(self, data: NewCourse) -> bool:
         elements = self.find_elements(NewCourseCreateLocators.CREATED_COURSE_NAME)
         new_course_list = [c.text for c in elements]
-        if new_course_data.full_name in new_course_list:
+        if data.full_name in new_course_list:
             return True
         return False
 

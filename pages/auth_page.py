@@ -1,4 +1,5 @@
 import logging
+import conftest
 from selenium.webdriver.remote.webelement import WebElement
 from locators.auth_locators import AuthPageLocators
 from locators.base_locators import BasePageLocators
@@ -21,6 +22,7 @@ class AuthPage(BasePage):
             self.click_element(self.confirm_exit())
         self.fill_element(self.email_input(), data.login)
         self.fill_element(self.password_input(), data.password)
+        conftest.logger.info(f"Логин:'{data.login}' Пароль: {data.password}")
         self.click_element(self.submit_button())
 
     def is_auth(self):

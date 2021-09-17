@@ -2,6 +2,7 @@ import allure
 import logging
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from models.auth_model import AuthData
 from pages.application import Application
@@ -12,7 +13,12 @@ logger = logging.getLogger("moodle")
 @pytest.fixture(scope="session")
 def app(request):
     base_url = request.config.getoption("--base-url")
-    fixture = Application(webdriver.Chrome(ChromeDriverManager().install()), base_url)
+    logger.info(f"Start moodle {base_url}")
+    add_options = Options()
+    add_options.headless = True
+    fixture = Application(
+        webdriver.Chrome(ChromeDriverManager().install(), options=add_options), base_url
+    )
     yield fixture
     fixture.quit()
 

@@ -17,11 +17,9 @@ class TestNewCourse:
         6. Удалить курс.
         """
         app.new_course.go_to_adding_new_course()
-        new_course_data = NewCourse.random()
-        app.new_course.create_new_course(new_course_data)
-        assert app.new_course.is_course_exist(
-            new_course_data
-        ), "No new course is created!"
+        data = NewCourse.random()
+        app.new_course.create_new_course(data)
+        assert app.new_course.is_course_exist(data), "No new course is created!"
 
     @pytest.mark.negative
     @pytest.mark.parametrize(
@@ -44,10 +42,10 @@ class TestNewCourse:
         5. Убедиться, что курс не создан.
         """
         app.new_course.go_to_adding_new_course()
-        new_course_data = NewCourse.random()
-        setattr(new_course_data, "full_name", full_name)
-        setattr(new_course_data, "short_name", short_name)
-        app.new_course.create_new_course(new_course_data)
+        data = NewCourse.random()
+        setattr(data, "full_name", full_name)
+        setattr(data, "short_name", short_name)
+        app.new_course.create_new_course(data)
         assert (
             not app.new_course.all_required_fields_filled()
         ), "Course is created with empty fields!"
