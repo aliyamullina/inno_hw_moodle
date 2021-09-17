@@ -33,7 +33,7 @@ class NewCoursePage(BasePage):
         self.fill_element(self.short_name_input(), data.short_name)
         self.fill_element(self.description_input(), data.description)
         self.click_element(self.save_and_display_button())
-        conftest.logger.info(f"Курс создан '{data.full_name}'")
+        conftest.logger.info(f"Новый курс. Название: {data.full_name}")
 
     def full_name_input(self) -> WebElement:
         return self.find_element(NewCourseCreateLocators.FULL_NAME)

@@ -22,7 +22,7 @@ class AuthPage(BasePage):
             self.click_element(self.confirm_exit())
         self.fill_element(self.email_input(), data.login)
         self.fill_element(self.password_input(), data.password)
-        conftest.logger.info(f"Логин:'{data.login}' Пароль: {data.password}")
+        conftest.logger.info(f"Авторизация. Логин {data.login} и пароль {data.password}")
         self.click_element(self.submit_button())
 
     def is_auth(self):

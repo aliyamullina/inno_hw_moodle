@@ -4,6 +4,7 @@ from common.auth_const import AuthConst
 from models.auth_model import AuthData
 
 
+@pytest.mark.auth
 class TestAuth:
     @pytest.mark.positive
     def test_auth_valid_data(self, app):

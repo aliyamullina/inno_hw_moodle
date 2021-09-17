@@ -3,6 +3,7 @@ import pytest
 from models.newcourse_model import NewCourse
 
 
+@pytest.mark.new_course
 class TestNewCourse:
     @pytest.mark.positive
     def test_create_new_course(self, app, auth):
