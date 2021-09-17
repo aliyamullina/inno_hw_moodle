@@ -5,6 +5,7 @@ from models.personaldata_model import PersonalData
 
 @pytest.mark.personal_data
 class TestPersonalData:
+    @pytest.mark.positive
     def test_valid_edit_basic_personal_data(self, app, auth):
         """
         Шаги.
@@ -21,6 +22,7 @@ class TestPersonalData:
         app.personal_data.edit_personal_data(personal_data)
         assert app.personal_data.is_changed(), "Personal data not changed!"
 
+    @pytest.mark.negative
     @pytest.mark.parametrize("field", ["name", "last_name", "email"])
     def test_edit_basic_personal_data_without_required_field(self, app, auth, field):
         """
@@ -41,6 +43,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
+    @pytest.mark.negative
     @pytest.mark.parametrize("email", ["mail", "@gmail.com", "0"])
     def test_edit_basic_personal_data_with_incorrect_email(self, app, auth, email):
         """
@@ -61,6 +64,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
+    @pytest.mark.negative
     @pytest.mark.parametrize(
         "name, last_name",
         [
@@ -89,6 +93,7 @@ class TestPersonalData:
             not app.personal_data.is_changed()
         ), "Personal data should not be changed!"
 
+    @pytest.mark.positive
     def test_valid_edit_more_personal_data(self, app, auth):
         """
         Шаги.
@@ -105,6 +110,7 @@ class TestPersonalData:
         app.personal_data_more.edit_personal_data_more(personal_data)
         assert app.personal_data_more.is_changed(), "Personal data not changed!"
 
+    @pytest.mark.positive
     def test_valid_edit_optional_personal_data(self, app, auth):
         """
         Шаги.
@@ -122,6 +128,7 @@ class TestPersonalData:
         app.personal_data_optional.edit_personal_data_optional(personal_data)
         assert app.personal_data_optional.is_changed(), "Personal data not changed!"
 
+    @pytest.mark.positive
     def test_valid_edit_tag_personal_data(self, app, auth):
         """
         Шаги.

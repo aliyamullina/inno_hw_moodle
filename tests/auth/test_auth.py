@@ -5,6 +5,7 @@ from models.auth_model import AuthData
 
 
 class TestAuth:
+    @pytest.mark.positive
     def test_auth_valid_data(self, app):
         """
         Шаги.
@@ -18,6 +19,7 @@ class TestAuth:
         app.login.auth(data)
         assert app.login.is_auth(), "We are not auth"
 
+    @pytest.mark.negative
     def test_auth_invalid_data(self, app):
         """
         Шаги.
@@ -31,6 +33,7 @@ class TestAuth:
         app.login.auth(data)
         assert AuthConst.AUTH_ERROR == app.login.auth_login_error(), "We are auth!"
 
+    @pytest.mark.negative
     @pytest.mark.parametrize("field", ["login", "password"])
     def test_auth_empty_data(self, app, field):
         """

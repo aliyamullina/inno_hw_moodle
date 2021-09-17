@@ -4,6 +4,7 @@ from models.newcourse_model import NewCourse
 
 
 class TestNewCourse:
+    @pytest.mark.positive
     def test_create_new_course(self, app, auth):
         """
         Шаги.
@@ -22,6 +23,7 @@ class TestNewCourse:
             new_course_data
         ), "No new course is created!"
 
+    @pytest.mark.negative
     @pytest.mark.parametrize(
         "full_name, short_name",
         [
