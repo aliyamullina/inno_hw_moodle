@@ -8,7 +8,11 @@
 Описание инструкции
 
 ## Добавление инструкции в Readme
+<<<<<<< HEAD
 [Branch readme](https://github.com/aliyamullina/inno_hw_moodle/pulls)
+=======
+[Branch readme](pull/1)
+>>>>>>> 7a701ee (Ссылка на pull requests readme)
 1. Добавить общее описание проекта
 2. Добавить описание, как локально развернуть проект
 3. Добавить описание, как воспользоваться отчетами Allure
