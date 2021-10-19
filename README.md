@@ -1,4 +1,4 @@
-[![Build Status](https://app.travis-ci.com/aliyamullina/inno_hw_ui_attestation.svg?branch=main)](https://app.travis-ci.com/aliyamullina/inno_hw_ui_attestation)
+[![Build Status](https://app.travis-ci.com/aliyamullina/inno_hw_tests_UI.svg?branch=main)](https://app.travis-ci.com/aliyamullina/inno_hw_tests_UI)
 
 # Автотестирование UI
 ### Web-приложение
